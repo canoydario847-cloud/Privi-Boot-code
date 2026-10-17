@@ -1,0 +1,14 @@
+[Unit]
+Description=Join this computer to the Privi network
+Wants=network-online.target docker.service
+After=network-online.target docker.service
+ConditionPathExists=/etc/privi/network-url
+ConditionPathExists=!/opt/privi-node/network.json
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/privi-firstboot
+TimeoutStartSec=3600
+
+[Install]
+WantedBy=multi-user.target

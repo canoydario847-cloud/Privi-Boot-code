@@ -1,0 +1,18 @@
+[Unit]
+Description=Privi OS desktop shell service
+After=network.target
+
+[Service]
+User=privi
+Group=privi
+Environment=PRIVI_FILES_ROOT=/home/privi
+ExecStart=/usr/bin/python3 /opt/privi-os/server.py
+Restart=always
+RestartSec=2
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadOnlyPaths=/home/privi
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

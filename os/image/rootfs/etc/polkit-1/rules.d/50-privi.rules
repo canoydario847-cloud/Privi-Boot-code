@@ -1,0 +1,14 @@
+// Let the Privi OS user manage power and Wi-Fi from the desktop shell.
+polkit.addRule(function (action, subject) {
+  if (subject.user !== "privi") return;
+  var allowed = [
+    "org.freedesktop.login1.power-off",
+    "org.freedesktop.login1.power-off-multiple-sessions",
+    "org.freedesktop.login1.reboot",
+    "org.freedesktop.login1.reboot-multiple-sessions",
+    "org.freedesktop.login1.suspend",
+    "org.freedesktop.login1.suspend-multiple-sessions",
+  ];
+  if (allowed.indexOf(action.id) >= 0) return polkit.Result.YES;
+  if (action.id.indexOf("org.freedesktop.NetworkManager.") === 0) return polkit.Result.YES;
+});

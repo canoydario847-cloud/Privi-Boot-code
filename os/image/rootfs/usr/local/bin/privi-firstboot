@@ -1,0 +1,8 @@
+#!/bin/sh
+# Join the Privi network named in /etc/privi/network-url (an https manifest URL).
+# privi-node.sh refuses networks that have not launched, so this is safe to
+# leave enabled before the public network exists; it simply retries next boot.
+set -eu
+url="$(head -n1 /etc/privi/network-url | tr -d '[:space:]')"
+[ -n "$url" ] || { echo "privi-firstboot: no network URL set"; exit 0; }
+exec /opt/privi-node-src/privi-node.sh join "$url" --yes --moniker "$(hostname -s)"

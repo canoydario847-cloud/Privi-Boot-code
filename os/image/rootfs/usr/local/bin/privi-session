@@ -1,0 +1,17 @@
+#!/bin/sh
+# Full-screen Privi OS session: a minimal Wayland compositor (cage) running
+# Chromium in app mode on the local shell. Restarts if the browser exits.
+export XDG_SESSION_TYPE=wayland
+for i in $(seq 1 30); do
+  curl -fs http://127.0.0.1:8080/ >/dev/null 2>&1 && break
+  sleep 1
+done
+while true; do
+  cage -d -s -- chromium \
+    --app=http://127.0.0.1:8080/ --kiosk --start-fullscreen \
+    --ozone-platform=wayland --no-first-run --noerrdialogs \
+    --disable-session-crashed-bubble --disable-infobars \
+    --user-data-dir="$HOME/.config/privi-browser" \
+    --check-for-update-interval=31536000
+  sleep 1
+done
