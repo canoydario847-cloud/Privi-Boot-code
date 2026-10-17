@@ -1,0 +1,13 @@
+#!/bin/sh
+# Runs inside the image while it is built.
+set -eu
+id privi >/dev/null 2>&1 || useradd -m -s /bin/bash -G audio,video,input,render,netdev privi
+passwd -d privi        # no password on the live system; the installer sets one
+cat > /home/privi/.bash_profile <<'P'
+if [ -z "${WAYLAND_DISPLAY:-}" ] && [ "$(tty)" = /dev/tty1 ]; then
+  exec /usr/local/bin/privi-session
+fi
+P
+chown privi:privi /home/privi/.bash_profile
+chmod +x /opt/privi-node-src/privi-node.sh /opt/privi-os/server.py
+systemctl enable privi-shell.service privi-firstboot.service NetworkManager.service docker.service

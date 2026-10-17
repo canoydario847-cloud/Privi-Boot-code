@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privi OS</title>
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+<div id="desktop" class="desktop" aria-label="Desktop">
+  <div id="windows" class="windows"></div>
+</div>
+
+<nav class="shelf" aria-label="Shelf">
+  <button id="launcher-btn" class="shelf-launcher" aria-label="Open launcher" title="Launcher">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.5"/></svg>
+  </button>
+  <div id="shelf-apps" class="shelf-apps"></div>
+  <button id="tray" class="tray" aria-label="Quick settings">
+    <span id="tray-node" class="node-dot" title="Privi node"></span>
+    <span id="tray-net" class="tray-icon"></span>
+    <span id="tray-batt" class="tray-batt"></span>
+    <span id="tray-clock" class="tray-clock">--:--</span>
+  </button>
+</nav>
+
+<section id="launcher" class="launcher" hidden aria-label="Launcher">
+  <div class="launcher-search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
+    <input id="launcher-input" type="search" placeholder="Search apps, or type a web address" autocomplete="off">
+  </div>
+  <div id="launcher-grid" class="launcher-grid"></div>
+</section>
+
+<section id="quick" class="quick" hidden aria-label="Quick settings">
+  <div class="quick-head">
+    <div>
+      <div id="quick-date" class="quick-date"></div>
+      <div id="quick-host" class="muted small"></div>
+    </div>
+    <div class="quick-power">
+      <button data-power="suspend" title="Sleep" aria-label="Sleep">☾</button>
+      <button data-power="reboot" title="Restart" aria-label="Restart">↻</button>
+      <button data-power="poweroff" title="Shut down" aria-label="Shut down">⏻</button>
+    </div>
+  </div>
+  <div class="quick-tiles">
+    <button class="tile" data-open="settings:wifi"><span id="q-net-label">Network</span><small id="q-net-sub" class="muted"></small></button>
+    <button class="tile" data-open="node"><span>Privi node</span><small id="q-node-sub" class="muted"></small></button>
+    <button class="tile" id="q-theme"><span>Dark theme</span><small id="q-theme-sub" class="muted"></small></button>
+    <button class="tile" data-open="settings"><span>Settings</span><small class="muted">Wallpaper, about</small></button>
+  </div>
+  <label class="quick-slider">Brightness<input id="q-bright" type="range" min="40" max="100" value="100"></label>
+</section>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script src="apps.js"></script>
+<script src="shell.js"></script>
+</body>
+</html>
