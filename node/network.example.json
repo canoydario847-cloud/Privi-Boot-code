@@ -1,0 +1,14 @@
+{
+  "name": "Privi Public Testnet",
+  "network_status": "planned",
+  "cosmos_chain_id": "privi-testnet-1",
+  "evm_chain_id": 0,
+  "upstream_tag": "v0.7.3",
+  "denom": "apriv",
+  "minimum_gas_prices": "0.0001apriv",
+  "genesis_url": "https://rpc-testnet.priviflow.us/genesis.json",
+  "genesis_sha256": "",
+  "seeds": [],
+  "persistent_peers": [],
+  "_notes": "Template only. Fill in after the genesis ceremony in Privi-Network/production-network/ops/PUBLIC_TESTNET.md: a unique EVM chain id, the published genesis hash, and the node ids of running seed nodes (from `privi-node.sh node-id`). Then set network_status to public-testnet."
+}
